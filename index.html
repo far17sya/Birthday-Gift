@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For You ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="rec-overlay">
+    <div class="rec-dot"></div>
+    <span>REC</span>
+</div>
+
+    <div id="start-screen" class="overlay">
+        <div class="envelope">
+            <h1>For You 💌</h1>
+            <button id="start-btn" onclick="startGame()">Open Letter</button>
+        </div>
+    </div>
+
+    <div class="stars-container">
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+    </div>
+    <div class="hearts-container">
+        <div class="heart">❤️</div>
+        <div class="heart">💖</div>
+        <div class="heart">💕</div>
+        <div class="heart">💗</div>
+        <div class="heart">❤️</div>
+    </div>
+
+    <div class="game-container">
+        <div class="header-bar">
+        <div class="pixel-btn" style="background:#ffd93d;"></div>
+        <div class="pixel-btn" onclick="toggleNightMode()" style="background:#4834d4; cursor: pointer;" title="Night Mode">🌙</div> 
+        <div class="pixel-btn" style="background:#ff6b6b;"></div>
+    </div>
+        <button onclick="showCompliment()" style="margin-top: 5px; background: #a29bfe; color: #fff; border: 2px solid #000; cursor: pointer; font-family: inherit; box-shadow: 2px 2px 0 #000;">
+        💌 Message from me
+        </button>
+
+        <div id="pat-counter" style="position: absolute; top: 10px; left: 10px; font-size: 8px; color: #555;">
+            Headpats: 0
+        </div>
+
+        <div class="battery-container">
+            <span>Love: </span>
+            <div class="battery-body">
+                <div class="battery-charge"></div>
+            </div>
+            <div class="battery-tip"></div>
+        </div>
+
+        <div class="header-bar">
+            <div class="pixel-btn" style="background:#ffd93d;"></div>
+            <div class="pixel-btn" style="background:#ff6b6b;"></div>
+        </div>
+
+        <div class="text-box" id="dialogue-text"></div>
+
+        <div id="heart-meter" style="margin-bottom: 10px; font-size: 20px;"></div>
+
+        <img id="main-image" src="" alt="Cute pixel art" onclick="spawnHearts()">
+
+        <div class="button-container" style="position: relative; display: inline-block;">
+            <button id="next-btn" onclick="nextSlide()">Next...</button>
+            <button id="no-btn" style="display: none; position: absolute; background: #ff6b6b;" onmouseover="moveButton()">No</button>
+        </div>
+
+        <div style="margin-top: 15px;">
+            <audio id="bg-music" loop>
+                <source src="Song.mp3" type="audio/mpeg">
+            </audio>
+            <button id="music-btn" onclick="toggleMusic()">
+                🎵 Play Music
+            </button>
+        </div>
+    </div>
+
+    <div id="timer"></div>
+
+    <div id="achievement" class="achievement-box">
+        <div class="achievement-icon">🏆</div>
+        <div class="achievement-text">
+            <h3>Achievement Unlocked</h3>
+            <p>Best Partner Ever ❤️</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

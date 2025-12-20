@@ -1,0 +1,488 @@
+/* --- GLOBAL LAYOUT --- */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: 'Press Start 2P', cursive;
+    
+    background-color: #ffccdd; 
+    background-image: 
+        linear-gradient(#ff99bb 2px, transparent 2px),
+        linear-gradient(90deg, #ff99bb 2px, transparent 2px);
+    background-size: 40px 40px; 
+    background-position: 0 0;
+    animation: moveGrid 4s linear infinite; 
+    
+    /* Cursor */
+    cursor: url('https://cur.cursors-4u.net/symbols/sym-2/sym179.ani'), url('https://cur.cursors-4u.net/symbols/sym-2/sym179.png'), auto;
+}
+
+button:hover {
+    cursor: url('https://cur.cursors-4u.net/symbols/sym-2/sym179.ani'), pointer;
+}
+
+/* --- GAME CONTAINER --- */
+.game-container {
+    background-color: #fff;
+    width: 350px;
+    padding: 20px;
+    border: 4px solid #000;
+    border-radius: 10px;
+    box-shadow: 10px 10px 0px rgba(0,0,0,0.2);
+    text-align: center;
+    position: relative;
+}
+
+/* Sticker Decorations */
+.game-container::before {
+    content: "🎀";
+    font-size: 40px;
+    position: absolute;
+    top: -20px; left: -20px;
+    transform: rotate(-15deg);
+    z-index: 10;
+}
+.game-container::after {
+    content: "⭐";
+    font-size: 40px;
+    position: absolute;
+    bottom: -20px; right: -20px;
+    transform: rotate(15deg);
+    z-index: 10;
+}
+
+.header-bar {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.pixel-btn {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #000;
+    display: inline-block;
+}
+
+/* --- IMAGES --- */
+#main-image {
+    display: block;
+    margin: 0 auto 20px auto;
+    width: 200px;
+    height: 200px;
+    object-fit: contain; 
+    image-rendering: pixelated; 
+}
+#main-image:hover {
+    animation: bounce 0.5s ease infinite;
+    cursor: pointer;
+}
+/* Squish Animation for Headpats */
+.squish-active {
+    animation: squish 0.3s ease-in-out;
+}
+@keyframes squish {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2, 0.8); }
+    100% { transform: scale(1); }
+}
+
+/* --- TEXT BOX --- */
+.text-box {
+    background-color: #ffe6ee;
+    border: 2px solid #000;
+    padding: 15px;
+    min-height: 60px;
+    margin-bottom: 20px;
+    font-size: 12px;
+    line-height: 1.5;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+/* Glitter Text */
+.glitter-text {
+    background: linear-gradient(to left, #000 20%, #d63384 30%, #ffeb3b 40%, #d63384 50%, #000 80%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    background-size: 500% auto;
+    animation: shine 3s linear infinite;
+    font-weight: bold;
+}
+
+/* Typing Bubbles */
+.typing-indicator {
+    display: inline-block;
+    padding: 5px 10px;
+    background: #eee;
+    border-radius: 20px;
+    margin-bottom: 10px;
+}
+.typing-dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background-color: #555;
+    border-radius: 50%;
+    animation: typingBounce 1.4s infinite ease-in-out both;
+    margin: 0 2px;
+}
+.typing-dot:nth-child(1) { animation-delay: -0.32s; }
+.typing-dot:nth-child(2) { animation-delay: -0.16s; }
+@keyframes typingBounce {
+    0%, 80%, 100% { transform: scale(0); }
+    40% { transform: scale(1); }
+}
+
+/* --- BUTTONS --- */
+#next-btn, #no-btn {
+    background-color: #a2d2ff;
+    border: 2px solid #000;
+    padding: 10px 20px;
+    font-family: inherit;
+    font-size: 12px;
+    cursor: pointer;
+    box-shadow: 4px 4px 0px #000;
+    transition: transform 0.1s;
+    animation: glowing 2s infinite;
+}
+#next-btn:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0px #000;
+}
+#no-btn {
+    background-color: #ff6b6b; /* Red for 'No' */
+}
+
+/* --- BACKGROUND ANIMATIONS --- */
+.hearts-container {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none; z-index: -1; overflow: hidden;
+}
+.heart {
+    position: absolute; top: -10%; font-size: 20px;
+    animation: fall linear infinite;
+}
+.heart:nth-child(1) { left: 10%; animation-duration: 5s; }
+.heart:nth-child(2) { left: 30%; animation-duration: 7s; animation-delay: 1s; }
+.heart:nth-child(3) { left: 50%; animation-duration: 4s; animation-delay: 2s; }
+.heart:nth-child(4) { left: 70%; animation-duration: 6s; }
+.heart:nth-child(5) { left: 90%; animation-duration: 5s; animation-delay: 3s; }
+
+.stars-container {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none; z-index: -2; overflow: hidden;
+}
+.star {
+    position: absolute; width: 4px; height: 4px; background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #fff, 0 0 20px #fff;
+    animation: shooting 3s linear infinite; opacity: 0;
+}
+.star:nth-child(1) { top: 0; left: 50%; }
+.star:nth-child(2) { top: 20%; left: 0%; animation-delay: 2s; }
+.star:nth-child(3) { top: 60%; left: 100%; animation-delay: 4s; animation-direction: reverse; }
+
+/* Floating Music Notes */
+.music-note {
+    position: fixed; bottom: -50px; font-size: 24px;
+    color: #333; animation: floatNote 4s linear forwards;
+    z-index: 5; pointer-events: none;
+}
+
+/* --- UI WIDGETS --- */
+#timer {
+    position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+    background-color: #fff0f5; border: 2px solid #ff6b6b;
+    border-radius: 15px; padding: 8px 15px;
+    font-size: 10px; color: #d63384;
+    box-shadow: 0 4px 0 rgba(255, 107, 107, 0.4);
+    animation: floatTimer 3s ease-in-out infinite;
+    z-index: 100;
+}
+
+#music-btn {
+    background-color: #ffb7b2; border: 2px solid #000;
+    border-radius: 50px; padding: 10px 15px;
+    font-size: 10px; color: #000; cursor: pointer;
+    box-shadow: 3px 3px 0px #000; transition: all 0.2s;
+    animation: wiggle 3s ease-in-out infinite;
+}
+#music-btn:hover { background-color: #ffdac1; transform: translate(2px, 2px); box-shadow: 1px 1px 0px #000; }
+
+.battery-container {
+    position: absolute; top: 10px; right: 10px;
+    display: flex; align-items: center; gap: 5px;
+    font-size: 8px; color: #555;
+}
+.battery-body {
+    width: 30px; height: 12px; border: 2px solid #333;
+    border-radius: 2px; padding: 1px; background: #fff;
+}
+.battery-charge {
+    width: 100%; height: 100%; background-color: #4cd137;
+    animation: pulseCharge 2s infinite;
+}
+.battery-tip { width: 3px; height: 6px; background-color: #333; }
+
+/* --- EFFECTS & ANIMATIONS --- */
+.rainbow-border {
+    border: 4px solid transparent !important;
+    background: linear-gradient(#fff, #fff) padding-box,
+                linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000) border-box;
+    animation: spinBorder 2s linear infinite;
+}
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #ffccdd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 1s ease-out;
+}
+.envelope {
+    background: #fff0f5; /* Lavender blush pink */
+    padding: 40px;
+    border: 4px dashed #ffb7b2; /* Cute dashed border like stitching */
+    border-radius: 20px; /* Rounder corners */
+    text-align: center;
+    /* Soft pink shadow */
+    box-shadow: 10px 10px 0px rgba(255, 183, 178, 0.5);
+    position: relative;
+}
+.envelope::after {
+    content: "💖";
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    font-size: 30px;
+    transform: rotate(15deg);
+}
+
+.envelope h1 {
+    color: #d63384; /* Deeper pink text */
+    margin-top: 0;
+}
+/* CUTE BUTTON STYLE */
+#start-btn {
+    background: #ff6b6b; /* Coral pink */
+    border: 3px solid #fff; /* White border for pop */
+    border-radius: 30px; /* Pill shape */
+    padding: 12px 25px;
+    color: #fff;
+    font-family: inherit;
+    font-size: 14px;
+    cursor: pointer;
+    margin-top: 20px;
+    /* Cute pixel shadow */
+    box-shadow: 4px 4px 0px #d63384; 
+    transition: all 0.2s ease;
+}
+
+/* Cute hover effect: bounce up and change shadow */
+#start-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 4px 7px 0px #d63384;
+    background: #ff8e8e; /* Slightly lighter pink */
+}
+
+#start-btn:active {
+    transform: translateY(2px);
+    box-shadow: 2px 2px 0px #d63384;
+}
+
+.achievement-box {
+    position: fixed; bottom: -100px; left: 50%;
+    transform: translateX(-50%); background-color: #333;
+    color: #fff; padding: 15px 20px; border-radius: 50px;
+    display: flex; align-items: center; gap: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    z-index: 2000; transition: bottom 0.5s ease-out;
+}
+.achievement-icon { font-size: 20px; }
+.achievement-text h3 { margin: 0; color: #ffeb3b; font-size: 8px; text-transform: uppercase; }
+.achievement-text p { margin: 5px 0 0; font-size: 10px; }
+.flash-effect {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background-color: white; z-index: 500; pointer-events: none;
+    animation: flash 0.3s ease-out forwards;
+}
+/* --- NIGHT MODE STYLES --- */
+body.night-mode {
+    background-color: #1a1a2e; /* Dark Blue */
+    background-image: 
+        linear-gradient(#16213e 2px, transparent 2px),
+        linear-gradient(90deg, #16213e 2px, transparent 2px);
+}
+
+body.night-mode .game-container {
+    background-color: #16213e; /* Darker box */
+    color: #fff;
+    border-color: #fff;
+    box-shadow: 10px 10px 0px rgba(255,255,255,0.1);
+}
+
+body.night-mode .text-box {
+    background-color: #0f3460;
+    color: #fff;
+    border-color: #fff;
+}
+
+body.night-mode #dialogue-text {
+    color: #fff;
+}
+/* CAMCORDER REC OVERLAY */
+.rec-overlay {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    font-family: 'Courier New', Courier, monospace; /* Digital font look */
+    font-weight: bold;
+    color: #ff0000;
+    font-size: 16px;
+    z-index: 9500;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+}
+
+.rec-dot {
+    width: 15px;
+    height: 15px;
+    background-color: #ff0000;
+    border-radius: 50%;
+    animation: blinkRec 1s infinite;
+}
+
+@keyframes blinkRec {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+/* Kiss Mark Style */
+.kiss-mark {
+    position: absolute;
+    font-size: 24px;
+    pointer-events: none; /* Let clicks pass through */
+    animation: fadeKiss 2s ease-out forwards;
+    z-index: 1; /* Behind the game card */
+    transform: rotate(-20deg);
+}
+
+@keyframes fadeKiss {
+    0% { opacity: 0; transform: scale(0.5) rotate(-20deg); }
+    20% { opacity: 1; transform: scale(1.2) rotate(-20deg); }
+    100% { opacity: 0; transform: scale(1) rotate(-20deg); }
+}
+
+/* Compliment Toast */
+.toast {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #fff;
+    border: 2px solid #000;
+    padding: 10px 20px;
+    border-radius: 20px;
+    box-shadow: 4px 4px 0px rgba(0,0,0,0.2);
+    font-size: 10px;
+    z-index: 10000;
+    animation: popIn 0.3s ease-out;
+}
+
+@keyframes popIn {
+    0% { top: -50px; opacity: 0; }
+    100% { top: 20px; opacity: 1; }
+}
+
+/* --- CUTE SPEECH BUBBLE --- */
+.speech-bubble {
+    position: absolute;
+    top: 130px; /* Positions it above the image */
+    left: 50%;
+    transform: translateX(-50%);
+    
+    background-color: #fff0f5; /* Lavender Blush */
+    border: 2px solid #ff6b6b; /* Cute Coral Border */
+    border-radius: 15px;
+    padding: 10px 15px;
+    
+    font-family: 'Press Start 2P', cursive;
+    font-size: 10px;
+    color: #d63384;
+    text-align: center;
+    width: 200px;
+    z-index: 20;
+    
+    /* Cute bounce animation */
+    animation: popBubble 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
+}
+
+/* The little triangle pointing down */
+.speech-bubble::after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 10px 10px 0;
+    border-style: solid;
+    border-color: #ff6b6b transparent;
+    display: block;
+    width: 0;
+}
+
+@keyframes popBubble {
+    0% { transform: translateX(-50%) scale(0); opacity: 0; }
+    100% { transform: translateX(-50%) scale(1); opacity: 1; }
+}
+
+/* Paper Plane */
+.paper-plane {
+    position: fixed;
+    top: 20%;
+    left: -100px;
+    font-size: 40px;
+    z-index: 500;
+    pointer-events: none;
+    animation: flyAcross 6s linear forwards;
+}
+
+@keyframes flyAcross {
+    0% { left: -100px; transform: translateY(0) rotate(10deg); }
+    25% { transform: translateY(-50px) rotate(20deg); }
+    50% { transform: translateY(0) rotate(10deg); }
+    75% { transform: translateY(50px) rotate(5deg); }
+    100% { left: 110vw; transform: translateY(-20px) rotate(10deg); }
+}
+
+/* KEYFRAMES */
+@keyframes fall { 0% { transform: translateY(-10vh); opacity: 1; } 100% { transform: translateY(110vh); opacity: 0; } }
+@keyframes bounce { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+@keyframes glowing { 0% { box-shadow: 0 0 5px #a2d2ff; } 50% { box-shadow: 0 0 20px #2a9d8f; } 100% { box-shadow: 0 0 5px #a2d2ff; } }
+@keyframes moveGrid { 0% { background-position: 0 0; } 100% { background-position: 40px 40px; } }
+@keyframes flash { 0% { opacity: 1; } 100% { opacity: 0; } }
+@keyframes spinBorder { 100% { background-position: 200% center; } }
+@keyframes shooting { 0% { transform: translateX(0) translateY(0) scale(1); opacity: 1; } 100% { transform: translateX(100vw) translateY(100vh) scale(0); opacity: 0; } }
+@keyframes pulseCharge { 0% { opacity: 1; } 50% { opacity: 0.7; } 100% { opacity: 1; } }
+@keyframes floatTimer { 0%, 100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(-5px); } }
+@keyframes wiggle { 0%, 100% { transform: rotate(0deg); } 25% { transform: rotate(-3deg); } 75% { transform: rotate(3deg); } }
+@keyframes floatNote { 0% { transform: translateY(0) rotate(0deg); opacity: 1; } 50% { transform: translateY(-50vh) rotate(20deg); opacity: 0.7; } 100% { transform: translateY(-100vh) rotate(-20deg); opacity: 0; } }
+@keyframes shine { to { background-position: 500% center; } }
+::-webkit-scrollbar { width: 12px; }
+::-webkit-scrollbar-track { background: #fff0f5; }
+::-webkit-scrollbar-thumb { background-color: #ffb7b2; border-radius: 20px; border: 3px solid #fff0f5; }
