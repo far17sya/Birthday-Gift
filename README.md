@@ -4,7 +4,7 @@ A cute, interactive, pixel-art styled birthday website featuring Snoopy!
 This project was built as a digital gift to celebrate a special birthday.
 
 **Features**
-*Interactive Story:* click-through narrative with typing text effects.
+***Interactive Story:*** click-through narrative with typing text effects.
 *Headpat Counter:* Click on Snoopy to give him headpats and see the counter go up.
 *Background Music:* Includes a custom music player (toggle play/pause).
 *Relationship Timer:* Automatically calculates and displays the days and hours. 
